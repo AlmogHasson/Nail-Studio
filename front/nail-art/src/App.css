@@ -1,0 +1,161 @@
+/*
+static:default - follows the document flow 
+relative - similar to static but can be positioned in relation to itslef.
+           when top/left/right/bottom are applied to it - moves it from
+           its starting point removes the element from the document flow.
+absolute - removes element from the doc flow. all the other elements will
+           not move and act as if it doesnt exist. applying bottom/left/
+           top/right will position the element absolutely inside the parent.
+           when a relative element is not declared in a parent, it will go 
+           to the next closest relative element or all the way back to the
+           html element.
+fixed - fixed to the entire html element. fixed moves with the page and 
+        stayes on the exact position no matter what.
+sticky - a mix of relative and fixed. by default it will act as relative,
+         but when the element scrolles out the page of it becomes fixed 
+
+*/
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  padding: 0;
+}
+
+.App{
+  position: relative;
+  padding-top: 40px;
+  transition: transform ease-in-out 250ms;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+}
+
+.nav-container {
+  padding: 0;
+  position: relative;
+  width: 30%;
+  left: 70%;
+}
+
+.app-container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  transition: filter 0.1s ease-in-out;
+}
+
+.dimmed {
+  filter: brightness(50%);
+}
+
+button {
+  position: fixed;
+  top: 2em;
+  right: 0.5%;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  transition: right 0.5s ease-in-out;
+  background-color: transparent;
+  color: pink;
+  border: 0;
+  z-index: 1;
+}
+
+button:hover {
+  color: rgb(172, 125, 148);
+}
+
+nav {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-color: pink;
+  transform: translateX(100%);
+  transition: transform ease-in-out 250ms;
+}
+
+.nav-close {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
+
+.close-icon {
+  display: none;
+}
+
+.hamburger {
+  display: block;
+}
+
+.nav-open {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+
+  & nav {
+    transform: translateX(0);
+  }
+
+  & button {
+    right: 30%;
+  }
+  
+  .close-icon {
+    display: block;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+}
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 0;
+  padding-top: 100px;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 1em;
+  width: max-content;
+}
+
+
+@media screen and (max-width: 500px) {
+  .nav-container {
+    width: 35%;
+    left:65%
+  }
+
+  .nav-open button {
+    right: 31%;
+  }
+}
+
+
+
+.svg-icon {
+  position: relative;
+  top: .125em;
+  height: 2em;
+  width: 1.5em;
+  left: .125em;
+}
+
+
+
