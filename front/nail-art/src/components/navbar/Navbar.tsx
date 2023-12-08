@@ -1,5 +1,5 @@
+import './Navbar.css'
 import { useState } from "react";
-
 interface NavbarProps {
   updateBrightness: (newBrightness: number) => void;
 }
@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ updateBrightness }) => {
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" d="M1 1h15M1 7h15M1 13h15"/>
           </svg>
           <svg className="svg-icon close-icon" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
         </button>
       </div>

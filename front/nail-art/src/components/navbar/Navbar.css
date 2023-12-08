@@ -1,0 +1,114 @@
+.nav-container {
+    padding: 0;
+    position: relative;
+    width: 30%;
+    left: 70%;
+  }
+
+  button {
+    position: fixed;
+    top: 2em;
+    right: 0.5%;
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    transition: right 0.5s ease-in-out;
+    background-color: transparent;
+    color: pink;
+    border: 0;
+    z-index: 30;
+  }
+
+  
+button:hover {
+    color: rgb(172, 125, 148);
+  }
+  
+  nav {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: pink;
+    transform: translateX(100%);
+    transition: transform ease-in-out 250ms;
+  }
+  
+  .nav-close {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .close-icon {
+    display: none;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  
+  .nav-open {
+    position: relative;
+    height: 200vh;
+    overflow: hidden;
+    z-index: 1;
+  
+    & nav {
+      transform: translateX(0);
+    }
+  
+    & button {
+      right: 30%;
+    }
+    
+    .close-icon {
+      display: block;
+    }
+  
+    .hamburger {
+      display: none;
+    }
+    
+  }
+  
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 0;
+    padding-top: 100px;
+    list-style: none;
+  }
+  
+  nav ul li {
+    padding: 1em;
+    width: max-content;
+  }
+  
+  
+  @media screen and (max-width: 500px) {
+    .nav-container {
+      width: 35%;
+      left:65%
+    }
+  
+    .nav-open button {
+      right: 31%;
+    }
+  }
+  
+  .svg-icon {
+    position: relative;
+    top: .125em;
+    height: 2em;
+    width: 1.5em;
+    left: .125em;
+  }
+  
+  
+  
+  

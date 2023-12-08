@@ -1,6 +1,8 @@
 import './App.css'
 import { useState } from 'react';
-import  { Navbar}  from './components/Navbar'
+import  { Navbar}  from './components/navbar/Navbar'
+import Parallax from './components/parallax/Parallax';
+import Carousels from './components/parallax/Carousels'
 
 function App() {
   const [brightness, setBrightness] = useState(100);
@@ -13,9 +15,8 @@ function App() {
     <>
       <Navbar updateBrightness = {updateBrightness} />
       <div className={`app-container ${brightness < 100 ? 'dimmed' : ''}`}>
-        <div className="App">
-          <p>hello</p>
-        </div>
+        <Parallax/>
+        <Carousels/>
       </div>
     </>
   )
