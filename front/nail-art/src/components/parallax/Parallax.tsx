@@ -1,24 +1,39 @@
-import { motion ,useScroll, useTransform } from 'framer-motion';
-import './parallax.css'
-import { useRef } from 'react'
+import { motion, spring, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
+
 
 export default function Parallax() {
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"],
-    });
-    const backgroundY = useTransform(scrollYProgress,[0,1],["0%","60%"]);
-    const backgroundY_L1 = useTransform(scrollYProgress,[0,1],["0%","10%"]);
-    const backgroundY_L2 = useTransform(scrollYProgress,[0,1],["0%","40%"]);
-    const textY = useTransform(scrollYProgress,[0,1],["-20%","60%"])
+
+  const { scrollY } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+  
+  useMotionValueEvent(scrollY, "change", (latest)=> {
+    const previous = scrollY.getPrevious();
+    if(latest > previous){
+      setScrolled(true);
+    }else{
+      setScrolled(false);
+    }
+  });
+  
 
   return (
-    <div className='parallax-page-1' ref={ref}>
-        <motion.h1 style={{y: textY}}>Welcome to my Nail Studio!</motion.h1>
-        <motion.div className="bg w-full h-screen overflow-hidden relative grid place-items-center" style={{ y:backgroundY}}/>
-        <motion.div className="layer-1" style={{y:backgroundY_L1}}/>
-        <motion.div className="layer-2" style={{y:backgroundY_L2}}/>
-    </div> 
-  )
+    <div className="relative text-white h-[100vh] img">
+      <div className="transparency">
+      <motion.div
+        variants={{
+          preScroll: { opacity: 1, translateX: "0%"},
+          postScroll:{ opacity: 0, translateX: "0%"}
+        }}
+        initial={{ opacity: 0, translateX: "-10%", translateY: 300 }}
+        animate={scrolled? "postScroll" : "preScroll"}
+        transition={scrolled?{ duration: 0.7}:{duration: 0.5}}    
+        style={{position:'sticky', top:0}}    
+        >
+        <h1>Welcome to my Nail Studio!</h1>
+      </motion.div>
+    </div>
+  </div>
+  );
 }
+

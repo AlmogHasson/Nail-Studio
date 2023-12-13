@@ -3,6 +3,7 @@ import { useState } from 'react';
 import  { Navbar}  from './components/navbar/Navbar'
 import Parallax from './components/parallax/Parallax';
 import Carousels from './components/parallax/Carousels'
+import Reserve from './components/reserve/Reserve';
 
 function App() {
   const [brightness, setBrightness] = useState(100);
@@ -17,6 +18,7 @@ function App() {
       <div className={`app-container ${brightness < 100 ? 'dimmed' : ''}`}>
         <Parallax/>
         <Carousels/>
+        <Reserve/>
       </div>
     </>
   )

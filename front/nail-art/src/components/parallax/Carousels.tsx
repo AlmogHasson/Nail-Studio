@@ -1,12 +1,9 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import './parallax.css'
 
 const Example = () => {
   return (
-    <div className="bg-neutral-800">
-      <HorizontalScrollCarousel />
-    </div>
+  <HorizontalScrollCarousel />
   );
 };
 
@@ -16,12 +13,14 @@ const HorizontalScrollCarousel = () => {
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["25%", "-86%"]);
+  
+
+  const x = useTransform(scrollYProgress, [0, 1], ["60%", "-100%"]);
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-black">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-4 ">
+        <motion.div style={{ x }} className="flex gap-4 transition-translate duration-1500 ease-in-out">
           {cards.map((card) => {
             return <Card card={card} key={card.id}/>;
           })}
@@ -32,26 +31,27 @@ const HorizontalScrollCarousel = () => {
 };
 
 const Card = ({ card }: { card: CardType }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  // const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    // target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 2], ["-20%", "10%"]);
+  const nextPer = Math.max(Math.min(scrollYProgress.getPrevious(),0),-100)
+  const x = useTransform(scrollYProgress, [0, 1], ["-40%", "50%"]);
 
   return (
     <div
       key={card.id}
-      className="group relative h-[300px] w-[250px] overflow-hidden bg-black"
-    >
+      className="group relative h-[400px] w-[300px] overflow-hidden bg-black">
       <motion.div
         style={{
           backgroundImage: `url(${card.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundPosition: '100% center',
           x
         }}
-        className="absolute w-[400px] inset-0 z-0 transition-transform group-hover:scale-110"
+        animate={{objectPosition: `${100}+${nextPer}`, fill:'backwards'}}
+        className="absolute w-[300px] h-[400px] inset-0 z-0 transform-transition duration-1500 ease-in-out"
       ></motion.div>
     </div>
   );

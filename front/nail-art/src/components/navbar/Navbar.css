@@ -17,22 +17,19 @@
     cursor: pointer;
     transition: border-color 0.25s;
     transition: right 0.5s ease-in-out;
-    background-color: transparent;
-    color: pink;
     border: 0;
     z-index: 30;
   }
-
   
 button:hover {
-    color: rgb(172, 125, 148);
+    color: rgb(255, 188, 222);
   }
   
   nav {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: pink;
+    background-color: rgb(49, 49, 49);
     transform: translateX(100%);
     transition: transform ease-in-out 250ms;
   }
@@ -52,10 +49,12 @@ button:hover {
   }
   
   .nav-open {
-    position: relative;
-    height: 200vh;
+    position: fixed;
+    height: 100vh;
+    right: 0%;
     overflow: hidden;
     z-index: 1;
+    width: 30%;
   
     & nav {
       transform: translateX(0);
@@ -88,7 +87,6 @@ button:hover {
     padding: 1em;
     width: max-content;
   }
-  
   
   @media screen and (max-width: 500px) {
     .nav-container {

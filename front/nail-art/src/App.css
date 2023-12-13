@@ -63,3 +63,7 @@ h3 {
   color: wheat;
   margin: 15%;
 }
+
+a:hover {
+  color: rgb(255, 188, 222);
+}
