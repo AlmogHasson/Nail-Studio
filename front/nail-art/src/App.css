@@ -47,9 +47,9 @@ sticky - a mix of relative and fixed. by default it will act as relative,
 }
 
 button {
-  position: fixed;
+  /* position: fixed;
   top: 2em;
-  right: 0.5%;
+  right: 0.5%; */
   border-radius: 8px;
   padding: 0.6em 1.2em;
   font-size: 1em;

@@ -1,13 +1,13 @@
 import './App.css'
 import { useState } from 'react';
 import  { Navbar}  from './components/navbar/Navbar'
-import Parallax from './components/parallax/Parallax';
+import Parallax from './components/parallax/Landing';
 import Carousels from './components/parallax/Carousels'
-import Reserve from './components/reserve/Reserve';
+import Calendar from './components/Calendar/Calendar';
 
 function App() {
-  const [brightness, setBrightness] = useState(100);
 
+  const [brightness, setBrightness] = useState(100);
   const updateBrightness  = (newBrightness: number) => {
     setBrightness(newBrightness);
   };
@@ -18,8 +18,8 @@ function App() {
       <div className={`app-container ${brightness < 100 ? 'dimmed' : ''}`}>
         <Parallax/>
         <Carousels/>
-        <Reserve/>
-      </div>
+        <Calendar/>
+    </div>
     </>
   )
 }

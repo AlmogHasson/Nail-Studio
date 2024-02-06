@@ -19,16 +19,16 @@ export const Navbar: React.FC<NavbarProps> = ({ updateBrightness }) => {
   
   
   return (
-    <div className="nav-container">
+    <div className="p-0 relative w-30% left-70%">
       <div className= {toggle} >
         <nav>
-            <ul>
-              <li><a href='#signin'>sign in</a></li>
-              <li><a href='#signup'>sign up</a></li>
-              <li><a href='#reserve'>reserve</a></li>
+            <ul className='flex flex-col pt-9 ist-none justify-start  font-myFont text-white text-3xl '>
+              <li className='p-2 w-max'><a href='#signin'>sign in</a></li>
+              <li className='p-2 w-max'><a href='#signup'>sign up</a></li>
+              <li className='p-2 w-max'><a href='#reserve'>reserve</a></li>
             </ul>
         </nav>
-        <button onClick={()=> handleButtonClick()}>
+        <button className="nav-button" onClick={()=> handleButtonClick()}>
           <svg className="svg-icon hamburger"  viewBox="0 0 20 20">
             <path stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" d="M1 1h15M1 7h15M1 13h15"/>
           </svg>

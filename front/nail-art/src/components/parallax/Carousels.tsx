@@ -1,26 +1,28 @@
-import { motion, useTransform, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { motion, useTransform, useScroll, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const Example = () => {
+
   return (
   <HorizontalScrollCarousel />
   );
 };
 
 const HorizontalScrollCarousel = () => {
+
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["-0.2 1", "1.33 1"]
+
   });
 
+  const x = useTransform(scrollYProgress, [0, 1], ["100%", "-100%"]);
   
-
-  const x = useTransform(scrollYProgress, [0, 1], ["60%", "-100%"]);
-
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-black">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-4 transition-translate duration-1500 ease-in-out">
+        <motion.div style={{ x }} id ="carousel" className="flex gap-4 transition-translate duration-1000 ease-in-out">
           {cards.map((card) => {
             return <Card card={card} key={card.id}/>;
           })}
@@ -31,31 +33,41 @@ const HorizontalScrollCarousel = () => {
 };
 
 const Card = ({ card }: { card: CardType }) => {
-  // const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    // target: targetRef,
-  });
+  const { scrollY, scrollYProgress } = useScroll();
+  const animation = useAnimation();
 
-  const nextPer = Math.max(Math.min(scrollYProgress.getPrevious(),0),-100)
-  const x = useTransform(scrollYProgress, [0, 1], ["-40%", "50%"]);
+  const x = useTransform(scrollYProgress, [0, 1], [150, 0]); 
+
+  useEffect(() => {
+    const updateAnimation = () => {
+      animation.start({
+        backgroundPosition: `${x.get()}% 50%`,
+        transition: { duration: 0.1 },
+      });
+    };
+
+    const removeUpdateListener = scrollY.on("change",updateAnimation);
+
+    return () => removeUpdateListener();
+  }, [animation, scrollY, x]);
 
   return (
     <div
       key={card.id}
-      className="group relative h-[400px] w-[300px] overflow-hidden bg-black">
+      className="group relative h-[400px] w-[300px] overflow-hidden bg-black"
+    >
       <motion.div
+        initial= {{backgroundPosition:'100% center'}}
         style={{
           backgroundImage: `url(${card.url})`,
-          backgroundSize: 'cover',
-          backgroundPosition: '100% center',
-          x
         }}
-        animate={{objectPosition: `${100}+${nextPer}`, fill:'backwards'}}
-        className="absolute w-[300px] h-[400px] inset-0 z-0 transform-transition duration-1500 ease-in-out"
+        animate={animation}
+        className="image123 absolute inset-0 z-0 transform-transition duration-1000 ease-in-out"
       ></motion.div>
     </div>
   );
 };
+
 
 export default Example;
 
