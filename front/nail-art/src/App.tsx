@@ -3,7 +3,7 @@ import { useState } from 'react';
 import  { Navbar}  from './components/navbar/Navbar'
 import Parallax from './components/parallax/Landing';
 import Carousels from './components/parallax/Carousels'
-import Calendar from './components/Calendar/Calendar';
+import Calendar from './components/calendar/Calendar';
 
 function App() {
 
