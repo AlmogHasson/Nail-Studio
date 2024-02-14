@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Schedule from "./Schedule";
-
 const Calendar = () => {
   const monthNames = [
     "January",
@@ -17,6 +16,7 @@ const Calendar = () => {
     "November",
     "December",
   ];
+
 
   function generateCalendar(year: number, month: number) {
     const calendarElement = document.getElementById("calendar");
@@ -69,6 +69,8 @@ const Calendar = () => {
   // Initialize the calendar with the current month and year
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const hours: number[] = [10, 11, 12, 13, 14,15,16,17,18,19,20];
+
   generateCalendar(currentYear, currentMonth);
 
   const handlePrev = () => {
@@ -128,11 +130,6 @@ const Calendar = () => {
         );
         showModal(formattedDate);
       });
-
-      // Event listener for closing the modal
-      document.getElementById("closeModal")?.addEventListener("click", () => {
-        hideModal();
-      });
     });
   });
 
@@ -171,19 +168,19 @@ const Calendar = () => {
           {/*Calendar Days*/}
           <div id="myModal"className="modal hidden fixed inset-0 flex items-center justify-center z-50">
             <div className="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-
-            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-              <div className="modal-content py-4 text-left px-6">
+            <div className="fixed top-20 modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 ">
+              <div className="modal-content py-4 text-left px-6 h-[60vh]" >
                 <div className="flex justify-between items-center pb-3">
-                  <p className="text-2xl font-bold">Selected Date</p>
+                  <p className="text-3xl font-bold">Selected Date</p>
                   <button
                     id="closeModal"
-                    className="modal-close px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring">
+                    className="text-2xl modal-close py-1 hover:text-pink-300 focus:outline-none focus:ring"
+                    onClick={hideModal}>
                     ✕
                   </button>
                 </div>
-                <div id="modalDate" className="text-xl font-semibold"></div>
-                {Schedule()}
+                <div id="modalDate" className="text-xl font-semibold"/>
+                <Schedule hours={hours}/>
               </div>
             </div>
           </div>
